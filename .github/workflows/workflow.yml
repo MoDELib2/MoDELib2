@@ -18,15 +18,23 @@ jobs:
           persist-credentials: False
       - name: Set up doxygen
         run: >-
-          echo "test"
+          wget https://www.doxygen.nl/files/doxygen-1.13.2.src.tar.gz;
+          gunzip doxygen-1.13.2.src.tar.gz;
+          tar xf doxygen-1.13.2.src.tar;
+          cd doxygen-1.13.2;
+          mkdir build;
+          cd build;
+          cmake -G "Unix Makefiles" ..;
+          make;
       - name: Build documentation
         run: >-
-          mkdir _build/; echo "Hello world!" > _build/index.html
+          cd doxygen/;
+          doxygen Doxyfile;
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: _build/
+          path: doxygen/HTML
 
   deploy-docs:
     needs:
@@ -48,7 +56,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: github-pages
-          path: _build/
+          path: doxygen/HTML
 
       - name: Deploy to GitHub Pages
         id: deployment
