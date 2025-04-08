@@ -12,7 +12,7 @@
 
 namespace model
 {
-    /**
+    /*!
     * @brief Constructor for InclusionMicrostructure.
     * @param mc Reference to the MicrostructureContainer.
     */
@@ -24,7 +24,7 @@ namespace model
     {
     }
 
-    /**
+    /*!
     * @brief Initializes inclusion configuration from input data.
     * 
     * @param configIO Input data structure containing configuration.
